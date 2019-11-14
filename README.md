@@ -1,4 +1,4 @@
-# shopping_cart
+# catalog_app_provider
 
 A new Flutter project.
 

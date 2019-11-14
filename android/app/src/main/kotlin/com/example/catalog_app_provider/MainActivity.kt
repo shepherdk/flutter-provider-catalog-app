@@ -1,4 +1,4 @@
-package com.example.shopping_cart
+package com.example.catalog_app_provider
 
 import android.os.Bundle
 
