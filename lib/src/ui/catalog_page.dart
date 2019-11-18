@@ -1,6 +1,10 @@
+import 'package:catalog_app_provider/src/utils/cart_provider.dart';
+import 'package:catalog_app_provider/src/utils/colors.dart';
+import 'package:catalog_app_provider/src/utils/strings.dart';
 import 'package:flutter/material.dart';
 import 'package:english_words/english_words.dart';
 import 'package:flutter/painting.dart';
+import 'package:provider/provider.dart';
 
 class CatalogPage extends StatefulWidget {
   @override
@@ -18,12 +22,10 @@ class _CatalogPageState extends State<CatalogPage> {
         actions: <Widget>[
           IconButton(
             icon: Icon(Icons.shopping_cart, color: Colors.black),
-            onPressed: () => setState(() {
-              //
-            }),
+            onPressed: () => Navigator.of(context).pushNamed(Strings.cartRoute),
           ),
         ],
-        backgroundColor: Colors.yellowAccent,
+        backgroundColor: millennialPink,
 //        elevation: 0,
       ),
       body: CatalogBody(),
@@ -34,60 +36,40 @@ class _CatalogPageState extends State<CatalogPage> {
 class CatalogBody extends StatefulWidget {
   @override
   _CatalogBodyState createState() => _CatalogBodyState();
-  final List<Color> _colors = [
-    Colors.red,
-    Colors.red[100],
-    Colors.redAccent,
-    Colors.orange,
-    Colors.orange[100],
-    Colors.orangeAccent,
-    Colors.yellow,
-    Colors.yellow[100],
-    Colors.yellowAccent,
-    Colors.green,
-    Colors.green[100],
-    Colors.greenAccent,
-    Colors.blueAccent,
-    Colors.indigo,
-    Colors.indigo[100],
-    Colors.indigoAccent,
-    Colors.teal,
-    Colors.teal[100],
-    Colors.tealAccent,
-  ];
 }
 
 class _CatalogBodyState extends State<CatalogBody> {
-  int _count = 0;
-  List _cart = [];
-  List _boolTile = List.generate(nouns.length, (i) => false);
+  int _count = 1;
+//  List _cart = [];
+  List _isTickedList = List.generate(nouns.length, (i) => false);
 
   @override
   Widget build(BuildContext context) {
+    final CartProvider _cart = Provider.of<CartProvider>(context);
+
     return ListView.builder(
       itemCount: nouns.length,
       padding: const EdgeInsets.all(12),
       itemBuilder: (BuildContext context, int i) {
-        _count += 1;
-        if (_count >= widget._colors.length) {
-          _count = 0;
-        }
         return ListTile(
-          contentPadding: EdgeInsets.all(0),
           leading: Container(
-            color: widget._colors[_count],
+            // loop through the colors list, from index 0 up to but not including list.length
+            // the remainder i % list.length will range from 0 - list.length
+            color: colors[i % colors.length],
             height: 32,
             width: 32,
           ),
           title: Text(nouns[i][0].toUpperCase() + nouns[i].substring(1)),
           trailing: FlatButton(
-              onPressed: () => setState(() {
-                _cart.add(nouns[i][0].toUpperCase() + nouns[i].substring(1));
-                _boolTile[i] = !_boolTile[i];
-                print('gggg ${_boolTile[i]}');
-                print(i);
-              }),
-              child: _boolTile[i]? Icon(Icons.check) : Text('ADD'),
+              onPressed: () {
+                if (!_isTickedList[i])
+                setState(() {
+                  _isTickedList[i] = !_isTickedList[i];
+                  _cart.add(nouns[i][0].toUpperCase() + nouns[i].substring(1));
+                  print(_cart.myCart.length);
+                });
+              },
+              child: _isTickedList[i]? Icon(Icons.check) : Text('ADD'),
           ),
         );
       },

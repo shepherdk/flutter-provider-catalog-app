@@ -1,3 +1,4 @@
+import 'package:catalog_app_provider/src/utils/colors.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 
@@ -52,7 +53,7 @@ class _LoginPageState extends State<LoginPage> {
                     Navigator.pushNamed(context, Strings.catalogRoute);
                   }),
                   child: Center(child: Text('ENTER', style: TextStyle(color: Colors.black))),
-                  color: Colors.yellow,
+                  color: millennialPink,
                 ),
               ],
             ),
