@@ -1,16 +1,17 @@
 # catalog_app_provider
 
-A new Flutter project.
+A flutter application to demonstrate how to use the provider package for state management
 
-## Getting Started
+## Goals
+Building an application to demonstrate how to use the [flutter provider package](https://pub.dev/packages/provider) to share the current state of a widget between screens.
 
-This project is a starting point for a Flutter application.
+Provide code for the example used in the [simple app state management docs](https://flutter.dev/docs/development/data-and-backend/state-mgmt/simple)
 
-A few resources to get you started if this is your first Flutter project:
+Widgets used
+  - login widget
+  - catalog widget (home screen)
+  - cart widget
+  
+Result
 
-- [Lab: Write your first Flutter app](https://flutter.dev/docs/get-started/codelab)
-- [Cookbook: Useful Flutter samples](https://flutter.dev/docs/cookbook)
-
-For help getting started with Flutter, view our
-[online documentation](https://flutter.dev/docs), which offers tutorials,
-samples, guidance on mobile development, and a full API reference.
+![Flutter provider demo](demo/demo.gif)
